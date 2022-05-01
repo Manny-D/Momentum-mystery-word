@@ -1,0 +1,74 @@
+# MVP
+1. computer read file -> working
+with open('test-word.txt') as f:
+    word_string = f.read()
+    word_list = word_string.split()
+    current_word = random.choice(word_list)
+
+
+2. start with test_word.txt (one word) -> working
+same as above => have to update ('test-word.txt') to ('words.txt')
+
+
+3. tell user how many letters word has -> working
+print(len(word)) -> thought / see below 
+print("Ok.. let's play!\n" "Your word is", len(current_word), "letters long.")
+
+
+4 Ask user to guess one letter -> working
+guess = input("\nPlease enter 1 letter to guess: ")
+
+
+5. Tell the user if the guess is in the word
+same as 6
+
+
+6. Display partially guessed word like in Wheel of Fortune
+for char in current_word:
+    if char in answer:
+        print(char, end = "")
+        
+    elif char not in answer:
+        print("*", end = "")
+
+
+7. game ends when player guesses word -> wonky and likely needs to be changed
+if w == 0: # works but want to try something different
+            print("\nYou did it!\nThe Mystery Word was " + current_word + " and was solved in " + str(8 - count) + " guesses!")
+            exit()
+    
+
+
+
+*MVP's done'ish*
+
+
+
+# 2.0
+1. design the word selection after the game logic
+?
+
+2. computer chooses random word -> done?
+current_word = random.choice(word_list)
+
+3. validate guess - make sure is only one letter
+if not guess.isalpha(): # looks to be working now
+    print("Invalid entry. Please enter letters only.")
+
+4. limit user to 8 guesses, game ends if user runs out of guesses
+count = 8
+if count == 0:
+    print("\nGame Over!!\nNo more guesses left =(\nThe Mystery Word was " + current_word + ".")
+    break
+
+5. user guesses same letter twice, do not take away a guess
+if not guess.isalpha(): # looks to be working now
+    print("\nInvalid entry: " + guess + ". Please enter a letter only.")
+elif len(guess) > 1:   # looks to be working even if correct letter entered
+    print("\nInvalid entry: " + guess + ". Only 1 letter please.")
+
+
+6. print message that they can guess again
+if answer not in current_word:
+    count -= 1
+    print("Sorry, try again!\nYou have " + str(count) + " guesses remaining)")
